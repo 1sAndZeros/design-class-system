@@ -106,16 +106,18 @@ class TodoList:
 
 class Todo:
     # User-facing properties:
-    #   todos: list of todo items
+    #   task: name of the task
+    #   complete: decribes whether the task is complete
 
-    def __init__(self):
+    def __init__(self, task):
         # Parameters:
-        #   todos: list of todo instances
+        #   task: string representing the name of the task
+        #   complete: bool representing if task is complete
         pass # No code here yet
 
-    def add(self, task):
-        # Paramters:
-        #   string representing description of the task
+    def mark_complete(self):
+        # Side effects:
+        #   changes the complete property to True
         pass # No code here yet
 
 ```
@@ -135,10 +137,10 @@ users todo list shouild be reflected
 """
 johns_diary = Diary()
 johns_todo_list = TodoList()
-john_smith = User('John Smith')
+john_smith = User('John Smith', diary=johns_diary, todo_list = johns_todo_list)
 john_smith.name # => 'John Smith'
 john_smith.diary # => johns_diary
-john_smith.todo_list # => johns_diary
+john_smith.todo_list # => johns_todo_list
 
 """
 Create instance of a diary and a diary entry
@@ -196,8 +198,8 @@ entry1 = DiaryEntry('Entry One', 'This is my first diary entry')
 my_diary.add(entry1)
 entry2 = DiaryEntry('Entry Two', 'This is my second diary entry which is longer')
 my_diary.add(entry2)
-my_diary.read_entry_given_time(10,20) # => 'This is my second diary entry which is longer'
 my_diary.read_entry_given_time(2,4) # => 'This is my first diary entry'
+my_diary.read_entry_given_time(10,20) # => 'This is my second diary entry which is longer'
 
 """
 Given a diary and 2 entries
@@ -241,12 +243,12 @@ the todo is reflected in the todos list
 along with the other todos added
 """
 my_todo_list = TodoList()
-task1 = ToDo('Make a shopping list')
+task1 = Todo('Make a shopping list')
 my_todo_list.add(task1)
 my_todo_list.todos() # => [task1]
-task2 = ToDo('Buy the shopping')
+task2 = Todo('Buy the shopping')
 my_todo_list.add(task2)
-my_todo_list.todos() # => [task1, task2]
+my_todo_list.todos # => [task1, task2]
 
 ```
 
@@ -261,7 +263,7 @@ a more granular level of detail._
 When a todoList is intialised
 The todos list is empty
 """
-my_list = todoList()
+my_list = TodoList()
 my_list.todos # => []
 
 """
@@ -279,7 +281,7 @@ complete property should be True
 """
 task1 = Todo('Go Shopping')
 task1.mark_complete()
-task1.complete # => 'True'
+task1.complete # => True
 
 """
 When a Diary entry is intialised with a title and contents
